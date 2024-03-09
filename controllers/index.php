@@ -13,7 +13,7 @@
     /**
      * import tất cả các file của models
      *  */ 
-    require_once "../models/pdo.php";
+    require_once "models/pdo.php";
     /**
      *  Kiểm tra trang hiện tại là trang nào
      *  ví dụ với link: localhost:8080/index.php?page=home
@@ -24,11 +24,11 @@
     } else $page = "";
 
     switch($page) {
-        case "":
-            require_once "";
-            break;
+        // case "":
+        //     require_once "";
+        //     break;
         default:
-            require_once "index.php";
+            require_once "views/index.php";
             break;
     }
 ?>
