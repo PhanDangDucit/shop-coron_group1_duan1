@@ -1,6 +1,6 @@
-drop database if exists shopron ;
-create database shopron;
-use shopron;
+drop database if exists shopcoron;
+create database shopcoron;
+use shopcoron;
 
 
 CREATE TABLE `supplier` (
@@ -9,7 +9,7 @@ CREATE TABLE `supplier` (
     phone varchar(15),
     `address` varchar(255),
     primary key (supplier_id)
-) ;
+);
 
 CREATE TABLE `product_supplier` (
 	`supplier_id` int(11) NOT NULL,
@@ -98,15 +98,15 @@ CREATE TABLE `contact` (
 -- Cấu trúc bảng cho bảng `order`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE orders (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `payment_method_id` int(11) NOT NULL,
+  `payment_method_id` int(11) default 1,
   `contact_id` int(11) NOT NULL,
-  `order_date` datetime NOT NULL,
-  `total_price` float NOT NULL,
-  `payment_status_id` int(11) NOT NULL,
-  `ship_status_id` int(11) NOT NULL,
+  `order_date` datetime,
+  `total_price` int,
+  `payment_status_id` int(11) default 1,
+  `ship_status_id` int(11) default 1,
   PRIMARY KEY (`order_id`)
 );
 
@@ -140,8 +140,6 @@ CREATE TABLE `order_item` (
   order_id int(11) not null,
   PRIMARY KEY (`order_item_id`)
 );
-
-use shopron;
 
 INSERT INTO `cart` (`user_id`) VALUES
 (1),
@@ -337,8 +335,9 @@ INSERT INTO `product` (`name`, `description`, `price`, `thumbnail`, `import_date
 -- Chèn dữ liệu vào bảng `payment_method`
 INSERT INTO `payment_method` (`method_name`, link)
 VALUES
-('Tiền mặt', ''),
-('Momo', '');
+('none', ''),
+('Thanh toán bằng tiền mặt', ''),
+('Thanh toán bằng thẻ ATM thông qua Momo', '');
 
 INSERT INTO `payment_status` (`value`)
 VALUES
@@ -357,7 +356,9 @@ select * from payment_method;
 select * from banner;
 select * from cart;
 select * from cart_item;
-select * from `order`;
+select * from orders;
+select order_id from orders
+where user_id = 2 and order_date is null;
 select * from contact;
 select * from order_item;
 select * from payment_status;
@@ -368,3 +369,22 @@ select * from category;
 select * from product_category;
 select * from images;
 
+-- select cart.cart_id, sum(quantity * price) as "thanhtien"  from cart
+-- inner join cart_item
+-- on cart.cart_id = cart_item.cart_id
+-- inner join product
+-- on product.product_id = cart_item.product_id
+-- where cart.cart_id = 1;
+
+-- select cart.cart_id, quantity, price, cart_item.product_id  from cart
+-- inner join cart_item
+-- on cart.cart_id = cart_item.cart_id
+-- inner join product
+-- on product.product_id = cart_item.product_id
+-- where cart.cart_id = 1;
+
+-- select *  from cart
+-- inner join cart_item
+-- on cart.cart_id = cart_item.cart_id
+-- inner join product
+-- on product.product_id = cart_item.product_id;
