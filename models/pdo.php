@@ -6,11 +6,11 @@
      * input: sql
      * output: array (lien ket, khong lien ket) / String / Number
      *  */
-    $host = '';
-    $port = ;
-    $db_name = '';
-    $username = '';
-    $password = '';
+    $host = 'localhost';
+    $port = 3306;
+    $db_name = 'shopcoron';
+    $username = 'root';
+    $password = 'Mysql@23012024@root';
     $conn = null;
     try {
         $conn = new PDO("mysql:host=$host;port=$port;dbname=$db_name;charset=utf8", $username, $password);
@@ -22,7 +22,7 @@
     // Thực hiện câu lệnh truy vấn để lấy nhiều records trong database
     // Trả ra array chứa nhiều phần tử
     // Nếu không hiểu thì có thể test function trước khi làm
-    function laynhieuhang($sql) {
+    function lay_nhieu_hang($sql) {
         global $conn;
         $stmt = $conn -> prepare($sql);
         $stmt -> execute();
@@ -34,11 +34,10 @@
     // Thực hiện câu lệnh truy vấn để lấy 1 record (1 hàng) trong database
     // Trả ra array chứa một phần tử
     // Nếu không hiểu thì có thể test function trước khi làm
-    function laymothang($sql) {
+    function lay_mot_hang($sql) {
         global $conn;
         try {
             // func_get_args(): return a list elements of arrays
-            // array_slice($a, 0): return a array that contains elements from position 0
             // array_slice($a, 0): return a array that contains elements from position 0
             $sql_agrs = array_slice(func_get_args(), 1);
             $stmt = $conn -> prepare($sql);
@@ -54,7 +53,7 @@
     }
 
     // Thêm, sửa và xóa
-    function thaydoidulieu($sql) {
+    function thay_doi_du_lieu($sql) {
         global $conn;
         try {
             $sql_args = array_slice(func_get_args(), 1);

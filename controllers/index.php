@@ -6,29 +6,24 @@
     session_start();
     
     /**
+     * import tất cả các file của models
+     *  */
+    require_once "models/pdo.php";
+    require_once "models/cart_model.php";
+    require_once "models/order_model.php";
+
+    /**
      * import tất cả các file của controller
      * ví dụ: require_once "index.php";
      *  */
-
-    /**
-     * import tất cả các file của models
-     *  */ 
-    require_once "models/pdo.php";
-    /**
-     *  Kiểm tra trang hiện tại là trang nào
-     *  ví dụ với link: localhost:8080/index.php?page=home
-     *  */
-
+    // 
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
-    } else $page = "";
-
-    switch($page) {
-        // case "":
-        //     require_once "";
-        //     break;
-        default:
-            require_once "views/index.php";
-            break;
+    } else {
+        $page = "";
+    };
+    $url = $_SERVER['REQUEST_URI'];
+    if($url == "/shop-coron/index.php") {
+        header("Location: index.php?page=home");
     }
 ?>

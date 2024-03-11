@@ -2358,6 +2358,9 @@
 .cart_subtotal p span {
 	margin-right: 30px;
 }
+.cart_subtotal p input {
+	border: none;
+}
 .coupon_inner a {
 	display: block;
 	text-align: right;
@@ -3830,3 +3833,67 @@
 
 
 
+/* order page */
+/* .cart_subtotal p {
+	color: #333;
+	font-weight: 700;
+	font-size: 14px;
+}
+.cart_subtotal p.cart_amount {
+	font-size: 18px;
+	font-weight: 500;
+}
+.cart_subtotal p span {
+	margin-right: 30px;
+} */
+.order_section {
+	border: 1px solid #ddd;
+	margin-bottom: 35px;
+}
+.order_section h3 {
+	color: #fff;
+	line-height: 37px;
+	padding: 5px 15px;
+	background: #333;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 700;
+}
+.order_inner {
+	padding: 10px 20px 25px;
+}
+.order_inner p {
+	color: #999;
+	font-size: 13px;
+	margin-bottom: 20px;
+}
+.order_inner input {
+	border: none;
+	height: 42px;
+	background: none;
+	margin-bottom: 20px;
+}
+
+.order_subtotal {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+.order_subtotal p {
+	color: #333;
+	font-weight: 700;
+	font-size: 14px;
+}
+.order_subtotal p.cart_amount {
+	font-size: 18px;
+	font-weight: 500;
+}
+.order_subtotal p span {
+	margin-right: 30px;
+}
+.order_subtotal p input {
+	outline:none;
+}
