@@ -23,7 +23,7 @@
         $page = "";
     };
     $url = $_SERVER['REQUEST_URI'];
-    if($url == "/shop-coron/index.php") {
+    if($url == "/shop-coron/index.php" || $url == "/shop-coron/") {
         header("Location: index.php?page=home");
     }
 ?>
