@@ -12,7 +12,8 @@ CREATE TABLE `product` (
   `description` text NOT NULL,
   `price` int(11) default 0,
   `thumbnail` varchar(200),
-  `image_id` int(11),
+  views int default 0,
+  priceSale int default 0,
   `import_date` datetime,
   `category_id` int(11) not null,
   PRIMARY KEY (`product_id`)
