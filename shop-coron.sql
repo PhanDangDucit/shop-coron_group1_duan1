@@ -14,7 +14,7 @@ CREATE TABLE `product` (
   `thumbnail` varchar(200),
   views int default 0,
   price_sale int default 0,
-  `import_date` datetime,
+  `post_date` datetime default current_timestamp,
   `category_id` int(11) not null,
   PRIMARY KEY (`product_id`)
 );
@@ -52,7 +52,7 @@ CREATE TABLE `user` (
   `fullname` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `register_date` date NOT NULL,
-  `role` int NOT NULL,
+  `role` tinyint NOT NULL,
   PRIMARY KEY (`user_id`)
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE `contact` (
   `phone` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `address` varchar(200),
-  is_default bool default 0,
+  is_default tinyint default 0,
   PRIMARY KEY (`contact_id`)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE orders (
   `payment_method_id` int(11) default 1,
   `contact_id` int(11) NOT NULL,
   `order_date` datetime,
-  `payment_status_id` int(11) default 1,
+  `payment_status` tinyint default 0,
   `order_status_id` int(11) default 1,
   PRIMARY KEY (`order_id`)
 );
@@ -86,16 +86,8 @@ CREATE TABLE orders (
 CREATE TABLE `payment_method` (
   `payment_method_id` int(11) NOT NULL AUTO_INCREMENT,
   `method_name` varchar(100) NOT NULL,
-  image_link varchar(255),
+  image varchar(255),
   PRIMARY KEY (`payment_method_id`)
-);
-
-
-
-CREATE TABLE `payment_status` (
-  `payment_status_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` varchar(100) NOT NULL,
-  PRIMARY KEY (`payment_status_id`)
 );
 
 CREATE TABLE `order_status` (
@@ -107,7 +99,7 @@ CREATE TABLE `order_status` (
 CREATE TABLE order_item (
   product_id int(11) NOT NULL,
   order_item_id int(11) NOT NULL AUTO_INCREMENT,
-  price int,
+  price int not null,
   quantity int not null,
   order_id int(11) not null,
   PRIMARY KEY (`order_item_id`)
@@ -123,7 +115,6 @@ where user_id = 2 and order_date is null;
 
 select * from contact;
 select * from order_item;
-select * from payment_status;
 select * from order_status;
 select * from category;
 select * from images;
