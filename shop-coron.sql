@@ -13,7 +13,7 @@ CREATE TABLE `product` (
   `price` int(11) default 0,
   `thumbnail` varchar(200),
   views int default 0,
-  priceSale int default 0,
+  price_sale int default 0,
   `import_date` datetime,
   `category_id` int(11) not null,
   PRIMARY KEY (`product_id`)
@@ -86,7 +86,7 @@ CREATE TABLE orders (
 CREATE TABLE `payment_method` (
   `payment_method_id` int(11) NOT NULL AUTO_INCREMENT,
   `method_name` varchar(100) NOT NULL,
-  link varchar(255),
+  image_link varchar(255),
   PRIMARY KEY (`payment_method_id`)
 );
 
