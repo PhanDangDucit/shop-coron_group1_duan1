@@ -1,5 +1,6 @@
 <?php
-    require_once "controllers/index.php"; 
+    require_once "controllers/index.php";
+    
 ?>
 <!doctype php>
 <php class="no-js" lang="zxx">

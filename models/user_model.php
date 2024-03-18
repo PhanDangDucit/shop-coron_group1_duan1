@@ -8,4 +8,5 @@
         $row = lay_mot_hang($sql);
         return $row['contact_id'];
     }
+
 ?>
