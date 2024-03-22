@@ -22,7 +22,7 @@
     }
     
     function lay_all_nam() {
-        $sql = "select distinct(year(order_date)) as 'nam' from orders";
+        $sql = "select distinct(year(order_date)) as 'nam' from orders order by nam";
         return lay_nhieu_hang($sql);
     }
     

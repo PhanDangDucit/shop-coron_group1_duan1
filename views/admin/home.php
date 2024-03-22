@@ -5,8 +5,8 @@
     $so_luong_danh_muc = lay_so_luong_danh_muc();
     $so_luong_san_pham = lay_so_luong_san_pham();
     $ket_qua_lay_doanh_thu_theo_thang_nam = json_encode(lay_doanh_thu_theo_thang_nam());
-    $all_years = json_encode(lay_all_nam());
-    $year = 2022;
+    $all_years = lay_all_nam();
+    // $year = 2022;
     // $kq = $ket_qua_lay_doanh_thu_theo_thang_nam;
     // print_r($ket_qua_lay_doanh_thu_theo_thang_nam);
     // print_r(gettype($ket_qua_lay_doanh_thu_theo_thang_nam));
@@ -15,7 +15,7 @@
     // echo '<br>';
     // print_r(count($ket_qua_lay_doanh_thu_theo_thang_nam));
     $ket_qua_lay_so_order_theo_order_status = lay_so_luong_order_theo_trang_thai();
-    print_r($kq);
+    // print_r($all_years);
 ?>
 
     <div class="container">
@@ -77,6 +77,12 @@
                                         <input type="text" hidden value='<?=$ket_qua_lay_doanh_thu_theo_thang_nam?>'>
                                         <canvas id="myChart" class="w-100 h-75"></canvas>
                                     </div>
+                                    <div>
+                                        <?php 
+                                            foreach($all_years as $year) { ?>
+                                                <button class="btn-year border-0 btn-primary" onclick="layNam(<?=$year['nam']?>)"><?=$year['nam']?></button>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -116,10 +122,17 @@
     <!-- Chartjs -->
     <script src="../../assets/js/chartjs.js"></script>
     <script>
-        const chartPart = document.querySelector('.home-revenue-char-item');
         const inputRevenue = document.querySelector('.home-revenue-char-item input');
-        const year = 2022;
+        let year = 2022;
+        function layNam(nam_hien_tai) {
+            const oldChart = document.querySelector('#myChart');
+            year = Number(nam_hien_tai);
+            oldChart.remove();
+            const boxChart = document.querySelector('.home-revenue-char-item');
+            boxChart.innerHTML = '<canvas id="myChart" class="w-100 h-75"></canvas>';
+            formatDataBar(inputRevenue.value, year);
+        }
         document.addEventListener("DOMContentLoaded", () => {
-            formatDataBar(inputRevenue.value, 2022);
+            formatDataBar(inputRevenue.value, year);
         });
     </script>

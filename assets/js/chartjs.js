@@ -2,6 +2,7 @@
  * Đức: Hàm tạo chart doanh thu
  *  */ 
 function setUpChartBar(datas) {
+    console.log(datas);
     const xValues = [];
     const yValues = [];
     datas.map((data) => xValues.push(data.month));
@@ -65,7 +66,6 @@ function formatDataBar(revenues_php, year) {
             revenue: 0
         });
     }
-    console.log(datas);
     setUpChartBar(datas);
 }
 
