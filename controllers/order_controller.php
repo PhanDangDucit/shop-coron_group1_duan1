@@ -29,6 +29,5 @@
     print_r($order_id_created);
     tao_order_item($user_id, $order_id_created['order_id']);
     $tat_ca_san_pham_cart = lay_tat_ca_san_pham_trong_cart_item($user_id);
-    
     header('Location: ../index.php?page=order');
 ?>
