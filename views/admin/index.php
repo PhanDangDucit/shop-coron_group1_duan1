@@ -51,7 +51,6 @@
                 if($url == "/shop-coron/views/admin/index.php?page=$page") {
                     switch($page) {
                         case "dashboard":
-
                             require_once "home.php";
                             break;
                         }

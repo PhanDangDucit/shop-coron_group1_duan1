@@ -4,7 +4,11 @@
         <a class="navbar-brand" href="index.html">
             <h1 class="tm-site-title mb-0">Trang quản trị</h1>
         </a>
-        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button 
+            class="navbar-toggler ml-auto mr-0" 
+            type="button" data-toggle="collapse" 
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+        >
             <i class="fas fa-bars tm-nav-icon"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -16,10 +20,10 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="oder.php" >
                         <i class="far fa-file-alt"></i>
                         <span>
-                            Danh mục <i class="fas fa-angle-down"></i>
+                            Đơn hàng <i class="fas fa-angle-down"></i>
                         </span>
                     </a>
                 </li>
