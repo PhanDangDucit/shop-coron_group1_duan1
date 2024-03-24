@@ -102,54 +102,49 @@
                             </thead>
 
                             <?php
-require "./config/config.php";
-include './model/conn.php';
+                                require "./config/config.php";
+                                include './model/conn.php';
 
 
-try {
-    
-
-    $query = "SELECT * FROM payment_method 
-
-    INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
-       INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
-    INNER JOIN contact ON orders.contact_id = contact.contact_id
-    INNER JOIN user ON contact.user_id=user.user_id";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $query2= "SELECT * FROM order_status";
-    $stmt = $conn->prepare($query2);
-    $stmt->execute();
-    $order_status = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($orders as $order) {
-        echo '<tr>';
-        echo '<td class="tm-product-name">' . $order['order_id'] . '</td>';
-        echo '<td class="tm-product-name">' . $order['fullname'] . '</td>';
-        echo '<td>' . $order['phone'] . '</td>';
-        echo '<td>' . $order['email'] . '</td>';
-        echo '<td>' . $order['address'] . '</td>';
-        echo '<td>' . $order['method_name'] . '</td>';
-        echo '<td>'.'<form action="model/update_order.php" method="post" enctype="multipart/form-data" class="tm-edit-product-form">'.'<input name="order_id" value="'. $order['order_id'].'" style="display:none !important;">'.'<select id="order_status_id" name="order_status_id">';
-        foreach ($order_status as $o) {
-        echo '<option value="'.$o['order_status_id'].'">' .$o['value']. '</option>';
-        
-        }
-        echo '</select>'.'</td>';
-        echo '<td>  ';
-        // echo '<a href="#" class="tm-product-delete-link" onclick="deleteProduct(' . $order['order_id'] . ', this); return false;">';
-        echo '<input type="submit"><i class="fas fa-save" style="font-size:30px !important;"></i></input>';
-        echo '</a>';
-        echo '</form>';
-        echo '</td>';
-        echo '</tr>';
-    }
-} catch (PDOException $e) {
-    echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
-}
-?>
-
-
+                                try {
+                                    $query = "SELECT * FROM payment_method 
+                                    INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
+                                    INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
+                                    INNER JOIN contact ON orders.contact_id = contact.contact_id
+                                    INNER JOIN user ON contact.user_id=user.user_id";
+                                    $stmt = $conn->prepare($query);
+                                    $stmt->execute();
+                                    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    $query2= "SELECT * FROM order_status";
+                                    $stmt = $conn->prepare($query2);
+                                    $stmt->execute();
+                                    $order_status = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($orders as $order) {
+                                        echo '<tr>';
+                                        echo '<td class="tm-product-name">' . $order['order_id'] . '</td>';
+                                        echo '<td class="tm-product-name">' . $order['fullname'] . '</td>';
+                                        echo '<td>' . $order['phone'] . '</td>';
+                                        echo '<td>' . $order['email'] . '</td>';
+                                        echo '<td>' . $order['address'] . '</td>';
+                                        echo '<td>' . $order['method_name'] . '</td>';
+                                        echo '<td>'.'<form action="model/update_order.php" method="post" enctype="multipart/form-data" class="tm-edit-product-form">'.'<input name="order_id" value="'. $order['order_id'].'" style="display:none !important;">'.'<select id="order_status_id" name="order_status_id">';
+                                        foreach ($order_status as $o) {
+                                        echo '<option value="'.$o['order_status_id'].'">' .$o['value']. '</option>';
+                                        
+                                        }
+                                        echo '</select>'.'</td>';
+                                        echo '<td>  ';
+                                        // echo '<a href="#" class="tm-product-delete-link" onclick="deleteProduct(' . $order['order_id'] . ', this); return false;">';
+                                        echo '<input type="submit"><i class="fas fa-save" style="font-size:30px !important;"></i></input>';
+                                        echo '</a>';
+                                        echo '</form>';
+                                        echo '</td>';
+                                        echo '</tr>';
+                                    }
+                                } catch (PDOException $e) {
+                                    echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+                                }
+                                ?>
                         </table>
                     </div>
                     <!-- table container -->

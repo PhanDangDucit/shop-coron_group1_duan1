@@ -22,6 +22,16 @@
     } else {
         $page = "";
     };
+    if(isset($_GET["page-nr"])) {
+        $id = $_GET["page-nr"];
+    } else {
+        $id = 1;
+    };
+    if(isset($_GET["id"])) {
+        $idsp = $_GET["id"];
+    } else {
+        $idsp = 1;
+    };
     $user_id = 2;
     $url = $_SERVER['REQUEST_URI'];
     if($url == "/shop-coron/index.php" || $url == "/shop-coron/") {
@@ -38,5 +48,18 @@
             } else {
                 header("Location: index.php?page=home");
             }
+        case "home":
+            $start = 0;
+            $rows_per_page = 8;
+            $records = lay_nhieu_hang("SELECT * FROM product");
+            $nr_of_rows = count($records);
+            $pages = ceil($nr_of_rows / $rows_per_page);
+            if(isset($_GET['page-nr'])) {
+                $page = ((int)$_GET['page-nr'] - 1);
+                $start = $page * $rows_per_page;
+            }
+            $products = lay_nhieu_hang("SELECT * FROM product LIMIT $start, $rows_per_page");
+            $featuredProducts = lay_nhieu_hang("SELECT * FROM `product` ORDER BY views DESC LIMIT $start, $rows_per_page");  
+            $categorys = lay_nhieu_hang("SELECT * FROM category");
     }
 ?>
