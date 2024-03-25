@@ -34,7 +34,7 @@
                             ?>
                             <tbody>
                                 <tr>
-                                    <td class="product_thumb"><a href="#"><img src="<?=$item['thumbnail']?>" alt=""></a></td>
+                                    <td class="product_thumb"><a href="#"><img src="assets/<?=$item['thumbnail']?>" width="50px" height="50px" alt=""></a></td>
                                     <td class="product_name"><a href="#"><?=$item['name']?></a></td>
                                     <td class="product-price"><?=number_format($item['price'], 0, ',', '.').' đ';?></td>
                                     <td class="product_quantity"><?=$item['quantity']; ?></td>

@@ -27,7 +27,7 @@
 <body id="reportsPage">
     <nav class="navbar navbar-expand-xl">
         <div class="container h-100">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php?page=dashboard">
                 <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
             <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
                             <span class="sr-only">(Hiện tại)</span>
                         </a>
                     </li>
- <li class="nav-item dropdown">
+                     <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="oder.php" >
                                 <i class="far fa-file-alt"></i>

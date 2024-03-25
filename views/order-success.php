@@ -7,8 +7,8 @@
         <h1>Thành công</h1> 
         <p>Bạn đã đặt hàng thành công!</p>
         <div class="mt-5 d-flex justify-content-between">
-            <a href="/shop-coron" class="btn btn-outline-success text-decoration-none text-black">Trở về trang chủ</a>
-            <a href="/"class="btn btn-outline-success text-decoration-none text-black">Xem đơn hàng</a>
+            <a href="index.php" class="btn btn-outline-success text-decoration-none text-black">Trở về trang chủ</a>
+            <a href="index.php?page=view_order"class="btn btn-outline-success text-decoration-none text-black">Xem đơn hàng</a>
         </div>
     </div>
 </div>

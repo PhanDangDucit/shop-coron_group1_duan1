@@ -88,6 +88,7 @@ CREATE TABLE orders (
 );
 
 
+
 -- --------------------------------------------------------
 CREATE TABLE `payment_method` (
   `payment_method_id` int(11) NOT NULL AUTO_INCREMENT,

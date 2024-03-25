@@ -12,7 +12,7 @@
                         if (isset($_SESSION['username']) && ($_SESSION['username'] != "")) {
                             // Người dùng đã đăng nhập
                             echo '<li><a href="index.php?page=userinfo" title="Username">' . $_SESSION['username'] . '</a></li>';
-                            echo '<li><a href="index.php?page=thoat" title="Thoát" name="btn_logout">Thoát</a></li>';
+                            echo '<li><a href="index.php?page=thoat">Thoát</a></li>';
                         } else {
                             // Người dùng chưa đăng nhập
                             echo '<li><a href="index.php?page=dangky" title="Register">Đăng ký</a></li>';

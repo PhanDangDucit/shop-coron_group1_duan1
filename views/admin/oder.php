@@ -27,7 +27,7 @@
 <body id="reportsPage">
     <nav class="navbar navbar-expand-xl">
         <div class="container h-100">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php?page=dashboard">
                 <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
             <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
@@ -62,14 +62,14 @@
                             <i class="far fa-user"></i> Tài khoản
                         </a>
                     </li>
-                     <li class="nav-item dropdown">
-                            <a class="nav-link " href="category.php" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                                <span>
-                                    Danh mục<i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " href="category.php" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                            <span>
+                                Danh mục<i class="fas fa-angle-down"></i>
+                            </span>
+                        </a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -104,10 +104,11 @@
                             <?php
                                 require "./config/config.php";
                                 include './model/conn.php';
-
-
                                 try {
+                                    
+
                                     $query = "SELECT * FROM payment_method 
+
                                     INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
                                     INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
                                     INNER JOIN contact ON orders.contact_id = contact.contact_id
@@ -126,17 +127,22 @@
                                         echo '<td>' . $order['phone'] . '</td>';
                                         echo '<td>' . $order['email'] . '</td>';
                                         echo '<td>' . $order['address'] . '</td>';
-                                        echo '<td>' . $order['method_name'] . '</td>';
-                                        echo '<td>'.'<form action="model/update_order.php" method="post" enctype="multipart/form-data" class="tm-edit-product-form">'.'<input name="order_id" value="'. $order['order_id'].'" style="display:none !important;">'.'<select id="order_status_id" name="order_status_id">';
-                                        foreach ($order_status as $o) {
-                                        echo '<option value="'.$o['order_status_id'].'">' .$o['value']. '</option>';
-                                        
-                                        }
-                                        echo '</select>'.'</td>';
+                                        echo '<td>' ;
+                                        if ($order['payment_status']==0) echo "Chưa thanh toán"; 
+                                        else echo "Đã thanh toán"; 
+                                        '</td>';
+                                        echo '<td>' . '<form action="model/update_order.php" method="post" enctype="multipart/form-data" class="tm-edit-product-form">' . '<input name="order_id" value="' . $order['order_id'] . '" style="display:none !important;">' . '<select id="order_status_id" name="order_status_id">';
+                                foreach ($order_status as $o) {
+                                    echo '<option value="' . $o['order_status_id'] . '"';
+                                    if ($o['order_status_id'] == $order['order_status_id']) {
+                                        echo ' selected'; // Add the 'selected' attribute if the values match
+                                    }
+                                    echo '>' . $o['value'] . '</option>';
+                                }
+                                echo '</select>' . '</td>';
                                         echo '<td>  ';
-                                        // echo '<a href="#" class="tm-product-delete-link" onclick="deleteProduct(' . $order['order_id'] . ', this); return false;">';
-                                        echo '<input type="submit"><i class="fas fa-save" style="font-size:30px !important;"></i></input>';
-                                        echo '</a>';
+                                        echo '<input type="submit"></input>';
+
                                         echo '</form>';
                                         echo '</td>';
                                         echo '</tr>';
@@ -145,6 +151,8 @@
                                     echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
                                 }
                                 ?>
+
+
                         </table>
                     </div>
                     <!-- table container -->

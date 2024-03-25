@@ -53,8 +53,17 @@
                                 case "payment-success":
                                     require_once "views/order-success.php";
                                     break;
+                                case "login":
+                                    require_once "views/login.php";
+                                    break;
                                 case "profile":
                                     require_once "views/profile.php";
+                                    break;
+                                case "view_order":
+                                    require_once "views/view_order.php";
+                                    break;
+                                case "dangky":
+                                    require_once "views/register.php";
                                     break;
                                 case "shop":
                                     $start = 0;
