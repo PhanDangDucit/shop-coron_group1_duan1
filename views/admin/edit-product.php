@@ -28,34 +28,31 @@
 <body>
     <nav class="navbar navbar-expand-xl">
         <div class="container h-100">
-            <a class="navbar-brand" href="index.html">
-                <h1 class="tm-site-title mb-0">Quản lý sản phẩm</h1>
+            <a class="navbar-brand" href="index.php?page=dashboard">
+                <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
             <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars tm-nav-icon"></i>
+        <i class="fas fa-bars tm-nav-icon"></i>
         </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto h-100">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?page=dashboard">
+                        <a class="nav-link" href="index.php">
                             <i class="fas fa-tachometer-alt"></i> Trang chủ
-                            <span class="sr-only">(hiện tại)</span>
+                            <span class="sr-only">(Hiện tại)</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="oder.php" >
                             <i class="far fa-file-alt"></i>
-                            <span> Báo cáo <i class="fas fa-angle-down"></i> </span>
+                            <span>
+                                Đơn hàng <i class="fas fa-angle-down"></i>
+                            </span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Báo cáo hàng ngày</a>
-                            <a class="dropdown-item" href="#">Báo cáo hàng tuần</a>
-                            <a class="dropdown-item" href="#">Báo cáo hàng năm</a>
-                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="products.php">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="products.php">
                             <i class="fas fa-shopping-cart"></i> Sản phẩm
                         </a>
                     </li>
@@ -65,23 +62,21 @@
                             <i class="far fa-user"></i> Tài khoản
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-cog"></i>
-                            <span> Cài đặt <i class="fas fa-angle-down"></i> </span>
+                            <span>
+                                Danh mục<i class="fas fa-angle-down"></i>
+                            </span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Thông tin</a>
-                            <a class="dropdown-item" href="#">Thanh toán</a>
-                            <a class="dropdown-item" href="#">Tùy chỉnh</a>
-                        </div>
+                        
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link d-block" href="login.html">
-                Quản trị viên, <b>Đăng xuất</b>
-              </a>
+                        <a class="nav-link d-block" href="login.php">
+                Trang quản trị, <b>Đăng xuất</b>
+            </a>
                     </li>
                 </ul>
             </div>
@@ -89,69 +84,90 @@
     </nav>
     <!-- Main content -->
     <div class="container tm-mt-big tm-mb-big">
-        <div class="row">
-            <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-                <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
-                        </div>
+    <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Cập nhật sản phẩm</h2>
                     </div>
-                    <div class="row tm-edit-product-row">
-                        <div class="col-xl-6 col-lg-6 col-md-12">
-                            <!-- Product form -->
-                            <form action="./model/edit-product.php" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
-                                <div class="form-group mb-3">
-                                    <label for="name">Tên sản phẩm</label>
-                                    <input id="name" name="name" type="text" class="form-control validate" required />
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="name">Giá gốc</label>
-                                    <input id="price" name="price" type="text" class="form-control validate" required />
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="name">Giá Khuyến mãi</label>
-                                    <input id="price_sale" name="price_sale" type="text" class="form-control validate" required />
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="image">Hình ảnh sản phẩm</label>
-                                    <input id="image" name="thumbnail" type="file" accept="image/*" class="form-control-file" required />
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                                <div class="form-group mb-3">
-                                    <label for="description">Mô tả sản phẩm</label>
-                                    <textarea id="description" name="description" class="form-control validate" rows="3" required></textarea>
-                                </div>
-                                  <div class="form-group mb-3" style="padding:0 0 0 0 !important;">
-        <label for="category">Chọn danh mục sản phẩm</label>
-        <select id="category" name="category" class="form-control validate" required>
-            <?php
-            require_once "config/config.php";
-            include "model/conn.php";
+                </div>
+                <div class="row tm-edit-product-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12">
+                        <?php
+                        require "./config/config.php";
+                        include './model/conn.php';
+                        $product_id = intval($_GET['product_id']);
 
-            // Retrieve categories from the database
-            $stmt = $conn->prepare("SELECT * FROM category");
-            $stmt->execute();
-            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        try {
+                            $query = "SELECT * 
+                                      FROM product 
+                                      WHERE product_id = :product_id";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
+                            $stmt->execute();
+                            $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Generate options for each category
-            foreach ($categories as $category) {    
-                echo '<option value="' . $category['category_id'] . '">' . $category['name'] . '</option>';
-            }
-            ?>
-        </select>
-    </div>
+                            $query2 = "SELECT * 
+                                       FROM category";
+                            $stmt2 = $conn->prepare($query2);
+                            $stmt2->execute();
+                            $categories = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                        ?>
+
+                        <form action="./model/edit-product.php?product_id=<?php echo $product['product_id']; ?>" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
+                            <div class="form-group mb-3">
+                                <label for="name">Tên sản phẩm</label>
+                                <input id="name" name="name" type="text" value="<?php echo $product['name']; ?>" class="form-control validate" required />
                             </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật ngay</button>
+                            <div class="form-group mb-3">
+                                <label for="price">Giá gốc</label>
+                                <input id="price" name="price" type="text" value="<?php echo $product['price']; ?>" class="form-control validate" required />
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="price_sale">Giá Khuyến mãi</label>
+                                <input id="price_sale" name="price_sale" type="text" value="<?php echo $product['price_sale']; ?>" class="form-control validate" required />
+                            </div>
+                            <img width="200px" height="200px" src="../assets/<?php echo $product['thumbnail']; ?>" alt="">
+                            <div class="form-group mb-3">
+                                <label for="thumbnail">Hình ảnh sản phẩm</label>
+                                
+                                <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="form-control-file"  />
+                            </div>
+                            
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                            <div class="form-group mb-3">
+                                <label for="description">Mô tả sản phẩm</label>
+                                <textarea id="description" name="description" class="form-control validate" rows="3" required><?php echo $product['description']; ?></textarea>
+                            </div>
+                            <div class="form-group mb-3" style="padding:0 0 0 0 !important;">
+                                <label for="category">Chọn danh mục sản phẩm</label>
+                                <select id="category" name="category" class="form-control validate" required>
+                                    <?php
+                                    foreach ($categories as $category) {
+                                        echo '<option value="' . $category['category_id'] . '">' . $category['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật ngay</button>
+                        </div>
                         </form>
+                        <?php
+                        } catch (PDOException $e) {
+                            echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <footer class="tm-footer row tm-mt-small">
         <div class="col-12 font-weight-light">
             <p class="text-center text-white mb-0 px-4 small">

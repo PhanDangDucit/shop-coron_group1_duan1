@@ -14,7 +14,7 @@
      * Khi thoát khỏi trang order mà không đặt hàng
      *   thì tiến hành xóa 2 bảng order và order_item để tránh tạo ra dữ liệu mà không được sử dụng
      */
-    $contact_id = lay_thong_tin_lien_lac_mac_dinh($user_id);
+    $contact_id = lay_thong_tin_lien_lac_mac_dinh($user_id)['contact_id'];
     $ket_qua_kiem_tra_order = kiem_tra_su_ton_tai_order($user_id); 
     if($ket_qua_kiem_tra_order) {
         $order_id = $ket_qua_kiem_tra_order['order_id'];

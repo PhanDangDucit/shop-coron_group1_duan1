@@ -96,25 +96,28 @@
                             $categorys = lay_nhieu_hang("SELECT * FROM category");
                             require_once "views/home.php";
                         } else if($url == "/shop-coron/index.php?page=$page&id=$idsp") {
-                                switch($page) {
-                                    case "single-product":
-                                        $start = 0;
-                                        $rows_per_page = 8;
-                            
-                                        $records = lay_nhieu_hang("SELECT * FROM product");
-                                        $nr_of_rows = count($records);
-                            
-                                        $pages = ceil($nr_of_rows / $rows_per_page);
-                            
-                                        if(isset($_GET['page-nr'])) {
-                                            $page = ((int)$_GET['page-nr'] - 1);
-                                            $start = $page * $rows_per_page;
-                                        }
-                                        $products = lay_nhieu_hang("SELECT * FROM product LIMIT $start, $rows_per_page");
-                                        $productsDetail = lay_mot_hang("SELECT * FROM product WHERE product_id = $id");
-                                        $productSimilars = lay_nhieu_hang("SELECT * FROM product ORDER BY RAND() LIMIT 4");
-                                        require_once "views/single-product.php";
-                                }
+                            switch($page) {
+                                case "single-product":
+                                    $start = 0;
+                                    $rows_per_page = 8;
+                        
+                                    $records = lay_nhieu_hang("SELECT * FROM product");
+                                    $nr_of_rows = count($records);
+                        
+                                    $pages = ceil($nr_of_rows / $rows_per_page);
+                        
+                                    if(isset($_GET['page-nr'])) {
+                                        $page = ((int)$_GET['page-nr'] - 1);
+                                        $start = $page * $rows_per_page;
+                                    }
+                                    $products = lay_nhieu_hang("SELECT * FROM product LIMIT $start, $rows_per_page");
+                                    $productsDetail = lay_mot_hang("SELECT * FROM product WHERE product_id = $id");
+                                    $productSimilars = lay_nhieu_hang("SELECT * FROM product ORDER BY RAND() LIMIT 4");
+                                    require_once "views/single-product.php";
+                                case 'cancel_order':
+                                    require_once "views/cancel_order.php";
+                                    break;
+                            }
                         }
                         else {
                             require_once "views/404.php";

@@ -31,7 +31,7 @@
                 <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
             <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars tm-nav-icon"></i>
+        <i class="fas fa-bars tm-nav-icon"></i>
         </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -42,15 +42,14 @@
                             <span class="sr-only">(Hiện tại)</span>
                         </a>
                     </li>
-                     <li class="nav-item dropdown">
-
-                            <a class="nav-link dropdown-toggle" href="oder.php" >
-                                <i class="far fa-file-alt"></i>
-                                <span>
-                                    Đơn hàng <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="oder.php" >
+                            <i class="far fa-file-alt"></i>
+                            <span>
+                                Đơn hàng <i class="fas fa-angle-down"></i>
+                            </span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="products.php">
                             <i class="fas fa-shopping-cart"></i> Sản phẩm
@@ -62,21 +61,21 @@
                             <i class="far fa-user"></i> Tài khoản
                         </a>
                     </li>
-                     <li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="category.php" id="navbarDropdown" role="button"  aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                                <span>
-                                    Danh mục<i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            
-                        </li>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                            <span>
+                                Danh mục<i class="fas fa-angle-down"></i>
+                            </span>
+                        </a>
+                        
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link d-block" href="login.html">
-                Quản trị viên, <b>Đăng xuất</b>
-              </a>
+                        <a class="nav-link d-block" href="login.php">
+                Trang quản trị, <b>Đăng xuất</b>
+            </a>
                     </li>
                 </ul>
             </div>
@@ -120,9 +119,9 @@ try {
         echo '<td  onclick="window.location.href = \'edit-product.php?product_id=' . $product['product_id'] . '\';" class="product-name">' . $product['product_id'] . '</td>';
         echo '<td  onclick="window.location.href = \'edit-product.php?product_id=' . $product['product_id'] . '\';" class="product-name">' . $product['name'] . '</td>';
         echo '<td>' . $product['description'] . '</td>';
-        echo '<td>' . $product['price'] . '</td>';
-        echo '<td>' . $product['price_sale'] . '</td>';
-        echo '<td  onclick="window.location.href = \'edit-product.php?product_id=' . $product['product_id'] . '\';"><img style="width:150px;height:150px" src="../assets/' . $product['thumbnail'] . '" alt="Product Image"></td>';
+        echo '<td>' . number_format($product['price'], 0, ',', '.') . ' VND</td>';
+        echo '<td>' . number_format($product['price_sale'], 0, ',', '.') . ' VND</td>';
+        echo '<td  onclick="window.location.href = \'edit-product.php?product_id=' . $product['product_id'] . '\';"><img style="width:150px;height:150px" src="../../assets/' . $product['thumbnail'] . '" alt="Product Image"></td>';
          echo '<td>' . $product['views'] . '</td>';
         echo '<td>' . $product['post_date'] . '</td>';
         echo '<td>';

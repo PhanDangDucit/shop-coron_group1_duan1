@@ -28,31 +28,28 @@
 <body>
     <nav class="navbar navbar-expand-xl">
         <div class="container h-100">
-            <a class="navbar-brand" href="index.html">
-                <h1 class="tm-site-title mb-0">Quản lý sản phẩm</h1>
+            <a class="navbar-brand" href="index.php?page=dashboard">
+                <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
             <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars tm-nav-icon"></i>
+        <i class="fas fa-bars tm-nav-icon"></i>
         </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto h-100">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?page=dashboard">
+                        <a class="nav-link" href="index.php">
                             <i class="fas fa-tachometer-alt"></i> Trang chủ
-                            <span class="sr-only">(hiện tại)</span>
+                            <span class="sr-only">(Hiện tại)</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="oder.php" >
                             <i class="far fa-file-alt"></i>
-                            <span> Báo cáo <i class="fas fa-angle-down"></i> </span>
+                            <span>
+                                Đơn hàng <i class="fas fa-angle-down"></i>
+                            </span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Báo cáo hàng ngày</a>
-                            <a class="dropdown-item" href="#">Báo cáo hàng tuần</a>
-                            <a class="dropdown-item" href="#">Báo cáo hàng năm</a>
-                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="products.php">
@@ -61,27 +58,25 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="accounts.php">
+                        <a class="nav-link " href="accounts.php">
                             <i class="far fa-user"></i> Tài khoản
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-cog"></i>
-                            <span> Cài đặt <i class="fas fa-angle-down"></i> </span>
+                            <span>
+                                Danh mục<i class="fas fa-angle-down"></i>
+                            </span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Thông tin</a>
-                            <a class="dropdown-item" href="#">Thanh toán</a>
-                            <a class="dropdown-item" href="#">Tùy chỉnh</a>
-                        </div>
+                        
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link d-block" href="login.html">
-                Quản trị viên, <b>Đăng xuất</b>
-              </a>
+                        <a class="nav-link d-block" href="login.php">
+                Trang quản trị, <b>Đăng xuất</b>
+            </a>
                     </li>
                 </ul>
             </div>

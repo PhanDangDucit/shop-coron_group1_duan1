@@ -63,7 +63,7 @@
                         </a>
                     </li>
                         <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link active dropdown-toggle" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-cog"></i>
                             <span>
                                 Danh mục<i class="fas fa-angle-down"></i>
@@ -84,34 +84,53 @@
     </nav>
     <!-- Main content -->
     <div class="container tm-mt-big tm-mb-big">
-        <div class="row">
-            <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-                <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="tm-block-title d-inline-block">Thêm danh mục sản phẩm</h2>
-                        </div>
+    <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Cập nhật danh mục</h2>
                     </div>
-                    <div class="row tm-edit-product-row">
-                        <div class="col-xl-6 col-lg-6 col-md-12">
-                            <!-- Product form -->
-                            <form action="./model/add_category.php" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
-                                <div class="form-group mb-3">
-                                    <label for="name">Tên danh mục</label>
-                                    <input id="name" name="name" type="text" class="form-control validate" required />
-                                </div>
-                                
-    </div>
+                </div>
+                <div class="row tm-edit-product-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12">
+                        <?php
+                        require "./config/config.php";
+                        include './model/conn.php';
+                        $category_id = intval($_GET['category_id']);
+
+                        try {
+                            $query2 = "SELECT * 
+                                       FROM category 
+                                       WHERE category_id = :category_id";
+                            $stmt2 = $conn->prepare($query2);
+                            $stmt2->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+                            $stmt2->execute();
+                            $category = $stmt2->fetch(PDO::FETCH_ASSOC);
+                        ?>
+
+                        <form action="./model/edit-category.php?category_id=<?php echo $category['category_id']; ?>" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
+    
+                            <div class="form-group mb-3">
+                                <label for="name">Tên danh mục</label>
+                                <input id="name" name="name" type="text" value="<?php echo $category['name']; ?>" class="form-control validate"  />
                             </div>
+                    
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm danh mục ngay</button>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật ngay</button>
                             </div>
                         </form>
+                        <?php
+                        } catch (PDOException $e) {
+                            echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <footer class="tm-footer row tm-mt-small">
         <div class="col-12 font-weight-light">
             <p class="text-center text-white mb-0 px-4 small">

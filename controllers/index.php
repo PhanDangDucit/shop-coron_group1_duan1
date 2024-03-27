@@ -13,8 +13,7 @@
     require_once "models/order_model.php";
 
     /**
-     * import tất cả các file của controller
-     * ví dụ: require_once "index.php";
+     * Lay cac tham so can thiet
      *  */
     // 
     if(isset($_GET["page"])) {
@@ -32,7 +31,15 @@
     } else {
         $idsp = 1;
     };
-    $user_id = 2;
+    if(isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+        if( $_SESSION['role'] == 2) {
+           header('Location: views/admin/'); 
+        }
+    }
+
+
+    // Redirect
     $url = $_SERVER['REQUEST_URI'];
     if($url == "/shop-coron/index.php" || $url == "/shop-coron/") {
         header("Location: index.php?page=home");
@@ -45,7 +52,6 @@
                 if($ket_qua_kiem_tra_order){
                     $order_id = $ket_qua_kiem_tra_order['order_id'];
                     $all_products = lay_tat_ca_san_pham_trong_order_item($order_id);
-                    print_r($ket_qua_kiem_tra_order);
                 } else {
                     header("Location: index.php?page=home");
                 }
@@ -65,7 +71,6 @@
                 break;
             case "thoat":
                 require_once "controllers/exit_controller.php";
-                // dang_xuat(); // Gọi hàm dang_xuat() từ login_controller.php
                 break;
         }
     }

@@ -48,7 +48,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link d-block" href="login.html">
+                    <a class="nav-link d-block" href="../../index.php?page=thoat">
                         Quản trị viên, <b>Đăng xuất</b>
                     </a>
                 </li>

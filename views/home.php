@@ -74,13 +74,13 @@
                 <h3>Sản phẩm khuyến mãi</h3>
             </div>
             <div class="row mb-4">
-                <?php foreach($products as $product) : ?>
+                <?php foreach($products as $product) { ?>
                     <div class="col-lg-3">
-                        <div class="single_product">
+                        <div class="single_product" style="height: 410px;">
                             <div class="product_thumb">
-                                <a href="?page=single-product.php&id=<?= $product["product_id"] ?>"><img src="assets\img\product\product1.jpg" alt=""></a> 
+                                <a href="?page=single-product&id=<?= $product["product_id"] ?>"><img src="assets/<?=$product['thumbnail']?>" alt="" style="height: 250px;"></a> 
                                 <div class="img_icone">
-                                    <img src="assets\img\cart\span-new.png" alt="">
+                                    <img src="../assets/<?=$product['thumbnail']?>" alt="">
                                 </div>
                                 <div class="product_action">
                                     <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
@@ -89,7 +89,7 @@
                             <div class="product_content">
                                 <span class="product_price"><del style="color: gray;"><?= number_format($product["price"]) ?> đ</del></span>
                                 <span class="product_price"><?= number_format($product["price_sale"]) ?> đ</span>
-                                <h3 class="product_title"><a href="?page=single-product.php"><?= $product['name'] ?></a></h3>
+                                <h3 class="product_title"><a href="?page=single-product&id=<?= $product["product_id"] ?>"><?= $product['name'] ?></a></h3>
                             </div>
                             <div class="product_info">
                                 <ul>
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation example" style="width: 100%; display: flex; justify-content: center;">
                     <ul class="pagination">
@@ -128,21 +128,22 @@
                 <h3>Sản phẩm xem nhiều nhất</h3>
             </div>
             <div class="row">
-                <?php foreach($featuredProducts as $product) : ?>
+                <?php foreach($products as $product) { ?>
                     <div class="col-lg-3">
-                        <div class="single_product">
+                        <div class="single_product" style="height: 410px;">
                             <div class="product_thumb">
-                                <a href="?page=single-product.php"><img src="assets\img\product\product1.jpg" alt=""></a> 
+                                <a href="?page=single-product&id=<?= $product["product_id"] ?>"><img src="assets/<?=$product['thumbnail']?>" alt="" style="height: 250px;"></a> 
                                 <div class="img_icone">
-                                    <img src="assets\img\cart\span-new.png" alt="">
+                                    <img src="../assets/<?=$product['thumbnail']?>" alt="">
                                 </div>
                                 <div class="product_action">
                                     <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
                             <div class="product_content">
-                                <span class="product_price"><?= number_format($product["price"]) ?> đ</span>
-                                <h3 class="product_title"><a href="single-product.php"><?= $product['name'] ?></a></h3>
+                                <span class="product_price"><del style="color: gray;"><?= number_format($product["price"]) ?> đ</del></span>
+                                <span class="product_price"><?= number_format($product["price_sale"]) ?> đ</span>
+                                <h3 class="product_title"><a href="?page=single-product&id=<?= $product["product_id"] ?>"><?= $product['name'] ?></a></h3>
                             </div>
                             <div class="product_info">
                                 <ul>
@@ -152,11 +153,11 @@
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>       
         </div>
         <!--banner area start-->
-        <div class="banner_area mb-60">
+        <!-- <div class="banner_area mb-60">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="single_banner">
@@ -176,6 +177,6 @@
                 </div>
             </div>
         </div>     
-    </div>
+    </div> -->
 </div>  
 </div>

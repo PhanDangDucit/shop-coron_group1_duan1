@@ -19,11 +19,11 @@
 	-->
 </head>
 <style>
-    
-.tm-content-row{
-    margin-right: -550px !important;
-}
+    .tm-content-row{
+        margin-right: -550px !important;
+    }
 </style>
+
 <body id="reportsPage">
     <nav class="navbar navbar-expand-xl">
         <div class="container h-100">
@@ -31,7 +31,7 @@
                 <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
             <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars tm-nav-icon"></i>
+        <i class="fas fa-bars tm-nav-icon"></i>
         </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -43,9 +43,11 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link " href="oder.php" id="navbarDropdown" role="button"  aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="oder.php" >
                             <i class="far fa-file-alt"></i>
-                            <span> Đơn hàng <i class="fas fa-angle-down"></i> </span>
+                            <span>
+                                Đơn hàng <i class="fas fa-angle-down"></i>
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -55,25 +57,25 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="accounts.php">
+                        <a class="nav-link " href="accounts.php">
                             <i class="far fa-user"></i> Tài khoản
                         </a>
                     </li>
-                     <li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle active" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                                <span>
-                                    Danh mục<i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            
-                        </li>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                            <span>
+                                Danh mục<i class="fas fa-angle-down"></i>
+                            </span>
+                        </a>
+                        
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link d-block" href="login.html">
-                Quản trị viên, <b>Đăng xuất</b>
-              </a>
+                        <a class="nav-link d-block" href="login.php">
+                Trang quản trị, <b>Đăng xuất</b>
+            </a>
                     </li>
                 </ul>
             </div>
@@ -105,8 +107,9 @@ try {
 
     foreach ($category as $c) {
         echo '<tr>';
-        echo '<td class="tm-product-name">' . $c['category_id'] . '</td>';
-        echo '<td class="tm-product-name">' . $c['name'] . '</td>';
+        echo '<td  onclick="window.location.href = \'edit-category.php?category_id=' . $c['category_id'] . '\';" class="product-name">' . $c['category_id'] . '</td>';
+        echo '<td  onclick="window.location.href = \'edit-category.php?category_id=' . $c['category_id'] . '\';" class="product-name">' . $c['name'] . '</td>';
+
         echo '<td>';
        
         echo '<a href="#" class="tm-product-delete-link" onclick="deleteCategory(' . $c['category_id'] . ', this); return false;">';

@@ -9,15 +9,15 @@
                 <div class="header_links">
                     <ul>
                         <?php
-                        if (isset($_SESSION['username']) && ($_SESSION['username'] != "")) {
-                            // Người dùng đã đăng nhập
-                            echo '<li><a href="index.php?page=userinfo" title="Username">' . $_SESSION['username'] . '</a></li>';
-                            echo '<li><a href="index.php?page=thoat">Thoát</a></li>';
-                        } else {
-                            // Người dùng chưa đăng nhập
-                            echo '<li><a href="index.php?page=dangky" title="Register">Đăng ký</a></li>';
-                            echo '<li><a href="index.php?page=login" title="Login">Đăng nhập</a></li>';
-                        }
+                            if (isset($_SESSION['username']) && ($_SESSION['username'] != "")) {
+                                // Người dùng đã đăng nhập
+                                echo '<li><a href="index.php?page=profile" title="Username">' . $_SESSION['username'] . '</a></li>';
+                                echo '<li><a href="index.php?page=thoat">Thoát</a></li>';
+                            } else {
+                                // Người dùng chưa đăng nhập
+                                echo '<li><a href="index.php?page=dangky" title="Register">Đăng ký</a></li>';
+                                echo '<li><a href="index.php?page=login" title="Login">Đăng nhập</a></li>';
+                            }
                         ?>
                     </ul>
                 </div>

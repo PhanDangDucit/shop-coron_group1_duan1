@@ -38,18 +38,18 @@
                 <!--color area end--> 
 
                 <!--price slider start-->                                     
-                <div class="sidebar_widget price">
+                <!-- <div class="sidebar_widget price">
                     <h2>Price</h2>
                     <div class="ca_search_filters">
 
                         <input type="text" name="text" id="amount">  
                         <div id="slider-range"></div> 
                     </div>
-                </div>                                                       
+                </div>                                                        -->
                 <!--price slider end-->
 
                 <!--wishlist block start-->
-                <div class="sidebar_widget wishlist mb-30">
+                <!-- <div class="sidebar_widget wishlist mb-30">
                     <div class="block_title">
                         <h3><a href="#">Wishlist</a></h3>
                     </div>
@@ -83,11 +83,11 @@
                         <p>2  products</p>
                         <a href="#">» My wishlists</a>
                     </div>
-                </div>
+                </div> -->
                 <!--wishlist block end-->
 
                 <!--popular tags area-->
-                <div class="sidebar_widget tags  mb-30">
+                <!-- <div class="sidebar_widget tags  mb-30">
                     <div class="block_title">
                         <h3>popular tags</h3>
                     </div>
@@ -102,11 +102,11 @@
                         <a href="#">iphone 4s</a>
                         <a href="#">canon</a>
                     </div>
-                </div>
+                </div> -->
                 <!--popular tags end-->
 
                 <!--newsletter block start-->
-                <div class="sidebar_widget newsletter mb-30">
+                <!-- <div class="sidebar_widget newsletter mb-30">
                     <div class="block_title">
                         <h3>newsletter</h3>
                     </div> 
@@ -115,11 +115,11 @@
                         <input placeholder="Your email address" type="text">
                         <button type="submit">Subscribe</button>
                     </form>   
-                </div>
+                </div> -->
                 <!--newsletter block end--> 
 
                 <!--special product start-->
-                <div class="sidebar_widget special">
+                <!-- <div class="sidebar_widget special">
                     <div class="block_title">
                         <h3>Special Products</h3>
                     </div>
@@ -165,13 +165,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--special product end-->
             </div>
             <div class="col-lg-9 col-md-12">
                 <!--banner slider start-->
                 <div class="banner_slider mb-35">
-                    <img src="assets\img\banner\bannner10.jpg" alt="">
+                    <img src="assets\img\banner\banner_shop.jpg" alt="">
                 </div> 
                 <!--banner slider start-->
                 <!--shop toolbar start-->
@@ -181,32 +181,32 @@
                     <h3>Sản phẩm khuyến mãi</h3>
                 </div>
                 <div class="row mb-4">
-                    <?php foreach($products as $product) : ?>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a href="?page=single-product&id=<?= $product["product_id"] ?>"><img src="assets\img\product\product1.jpg" alt=""></a> 
-                                    <div class="img_icone">
-                                        <img src="assets\img\cart\span-new.png" alt="">
+                    <?php foreach($products as $product) { ?>
+                            <div class="col-lg-3">
+                                <div class="single_product" style="height: 410px;">
+                                    <div class="product_thumb">
+                                        <a href="?page=single-product&id=<?= $product["product_id"] ?>"><img src="assets/<?=$product['thumbnail']?>" alt="" style="height: 250px;"></a> 
+                                        <div class="img_icone">
+                                            <img src="../assets/<?=$product['thumbnail']?>" alt="">
+                                        </div>
+                                        <div class="product_action">
+                                            <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                                        </div>
                                     </div>
-                                    <div class="product_action">
-                                        <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                                    <div class="product_content">
+                                        <span class="product_price"><del style="color: gray;"><?= number_format($product["price"]) ?> đ</del></span>
+                                        <span class="product_price"><?= number_format($product["price_sale"]) ?> đ</span>
+                                        <h3 class="product_title"><a href="?page=single-product&id=<?= $product["product_id"] ?>"><?= $product['name'] ?></a></h3>
                                     </div>
-                                </div>
-                                <div class="product_content">
-                                    <span class="product_price"><del style="color: gray;"><?= number_format($product["price"]) ?> đ</del></span>
-                                    <span class="product_price"><?= number_format($product["price_sale"]) ?> đ</span>
-                                    <h3 class="product_title"><a href="?page=single-product"><?= $product['name'] ?></a></h3>
-                                </div>
-                                <div class="product_info">
-                                    <ul>
-                                        <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
-                                        <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">Chi tiết</a></li>
-                                    </ul>
+                                    <div class="product_info">
+                                        <ul>
+                                            <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
+                                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">Chi tiết</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php } ?>
                     <!-- Pagination -->
                     <nav aria-label="Page navigation example" style="width: 100%; display: flex; justify-content: center;">
                         <ul class="pagination">

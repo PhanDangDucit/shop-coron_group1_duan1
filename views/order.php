@@ -9,8 +9,6 @@
     if($ket_qua_kiem_tra_order){
         $order_id = $ket_qua_kiem_tra_order['order_id'];
         $all_products = lay_tat_ca_san_pham_trong_order_item($order_id);
-        print_r($ket_qua_kiem_tra_order);
-        echo 'asjbcdjasbcj';
     }
 ?>
 

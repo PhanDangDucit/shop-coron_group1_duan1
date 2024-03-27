@@ -1,109 +1,164 @@
 ﻿<?php
-    /**
-     * Đức: Tính số tiền cần thanh toán
-     */
-    require_once "utils/tinh_tong_so_tien_can_thanh_toan.php";
+/**
+ * Đức: Tính số tiền cần thanh toán
+ */
+require_once "utils/tinh_tong_so_tien_can_thanh_toan.php";
+require_once 'models/pdo.php';
+require_once 'models/cart_model.php'; // Đường dẫn đến file chứa các hàm liên quan đến giỏ hàng
+
+// Kiểm tra nếu user_id không được đặt trong session (chưa đăng nhập)
+if (!isset($_SESSION['user_id'])) {
+    // Đẩy sang trang đăng nhập
+    header("Location: ../index.php?page=login");
+    exit(); // Đảm bảo không chạy code phía dưới sau khi chuyển hướng
+}
+
+// Xử lý cập nhật số lượng sản phẩm trong giỏ hàng
+if (isset($_POST['update_cart'])) {
+    $user_id = $_SESSION['user_id'];
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
+
+    // Kiểm tra số lượng cập nhật
+    if ($quantity > 0 && $quantity <= 10) {
+        update_cart_item_quantity($user_id, $product_id, $quantity);
+    } else {
+        echo "Số lượng không hợp lệ!";
+    }
+}
+
+// Xử lý xóa sản phẩm khỏi giỏ hàng
+if (isset($_POST['remove_cart'])) {
+    $user_id = $_SESSION['user_id'];
+    $product_id = $_POST['remove_cart'];
+    remove_from_cart($user_id, $product_id);
+}
+
+// Xử lý xóa hết giỏ hàng
+if (isset($_POST['clear_cart'])) {
+    $user_id = $_SESSION['user_id'];
+    clear_cart($user_id);
+    echo "Đã xóa hết sản phẩm khỏi giỏ hàng!";
+    exit();
+}
 ?>
 
 <!--shopping cart area start -->
 <div class="shopping_cart_area">
-        <!-- Xử lý cart -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table_desc">
-                            <div class="cart_page table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product_remove">Delete</th>
-                                            <th class="product_thumb">Image</th>
-                                            <th class="product_name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product_quantity">Quantity</th>
-                                            <th class="product_total">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets\img\cart\cart17.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                            <td class="product-price">£65.00</td>
-                                            <td class="product_quantity"><input min="0" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£130.00</td>
-                                        </tr>
+    <!-- Xử lý cart -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table_desc">
+                <div class="cart_page table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Đặt user_id từ session vào biến
+                            $user_id = $_SESSION['user_id'];
 
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets\img\cart\cart18.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbags justo</a></td>
-                                            <td class="product-price">£90.00</td>
-                                            <td class="product_quantity"><input min="0" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£180.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets\img\cart\cart19.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag elit</a></td>
-                                            <td class="product-price">£80.00</td>
-                                            <td class="product_quantity"><input min="0" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£160.00</td>
-                                        </tr>
+                            // Gọi hàm lấy danh sách sản phẩm trong giỏ hàng
+                            $cart_items = lay_nhieu_hang("SELECT cart_item.product_id, cart_item.quantity, product.name, product.price, product.thumbnail FROM cart_item INNER JOIN product ON cart_item.product_id = product.product_id WHERE cart_item.user_id = $user_id");
 
-                                    </tbody>
-                                </table>   
-                            </div>  
-                            <div class="cart_submit">
-                                <button type="submit">update cart</button>
-                            </div>      
+                            // Kiểm tra xem có sản phẩm trong giỏ hàng không
+                            if ($cart_items):
+                                $stt = 1;
+                                $total = 0;
+                                foreach ($cart_items as $item):
+                                    // Tính tổng tiền cho từng sản phẩm
+                                    $subtotal = $item['price'] * $item['quantity'];
+                                    $total += $subtotal;
+                            ?>
+                                    <tr>
+                                        <td><?php echo $stt++; ?></td>
+                                        <td><img src="<?='assets/'.$item['thumbnail']; ?>" alt="<?php echo $item['name']; ?>" class="product-thumbnail" height="40px"></td>
+                                        <td><?php echo $item['name']; ?></td>
+                                        <td>
+                                            <?= number_format($item['price'], 0, ',', '.') . ' đ'; ?>
+                                        </td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="number" name="quantity" min="1" max="10" value="<?php echo $item['quantity']; ?>" style="width: 50px;">
+                                                <input type="hidden" name="product_id" value="<?php echo $item['product_id']; ?>">
+                                                <button type="submit" name="update_cart" class="btn btn-primary btn-sm">Cập nhật</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <?= number_format($subtotal, 0, ',', '.') . ' đ'; ?>
+                                        <td>
+                                            <form method="post">
+                                                <input type="hidden" name="remove_cart" value="<?php echo $item['product_id']; ?>">
+                                                <button type="submit" name="remove" class="btn btn-danger btn-sm">Xóa</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr class="total-row">
+                                    <td colspan="5"><strong>Tổng cộng</strong></td>
+                                    <td>
+                                        <?= number_format($total, 0, ',', '.') . ' đ'; ?>
+                                    <td>
+                                        <form method="post" class="actions">
+                                            <button type="submit" name="clear_cart" class="btn btn-warning">Xóa hết giỏ hàng</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="7">Không có sản phẩm trong giỏ hàng</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Coupon code -->
+    <!--coupon code area start-->
+    <div class="coupon_area">
+        <div class="row">
+            <!-- Xử lý trước khi order -->
+            <div class="col-lg-12 col-md-6">
+                <div class="coupon_code">
+                    <h3>Cart Totals</h3>
+                    <div class="coupon_inner">
+                        <div class="cart_subtotal">
+                            <p>Thành tiền</p>
+                            <p class="cart_amount">
+                                <?= number_format($thanh_tien, 0, ',', '.') . ' đ'; ?>
+                            </p>
                         </div>
+                        <div class="cart_subtotal">
+                            <p>Chi phí giao hàng:</p>
+                            <p class="cart_amount"><?= number_format($chi_phi_giao_hang, 0, ',', '.') . ' đ'; ?></p>
                         </div>
-                    </div>
-        <!-- Coupon code -->
-                    <!--coupon code area start-->
-                <div class="coupon_area">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code">
-                                <h3>Coupon</h3>
-                                <div class="coupon_inner">   
-                                    <p>Enter your coupon code if you have one.</p>                                
-                                    <input placeholder="Coupon code" type="text">
-                                    <button type="button">Apply coupon</button>
-                                </div>    
-                            </div>
+                        <div class="cart_subtotal">
+                            <p>Tổng cộng:</p>
+                            <p class="cart_amount">
+                                <?= number_format($tong_so_tien_can_thanh_toan, 0, ',', '.') . ' đ'; ?>
+                            </p>
                         </div>
-                        <!-- Xử lý trước khi order -->
-                        <div class="col-lg-6 col-md-6">
-                                <div class="coupon_code">
-                                    <h3>Cart Totals</h3>
-                                    <div class="coupon_inner">
-                                        <div class="cart_subtotal">
-                                            <p>Thành tiền</p>
-                                            <p class="cart_amount">
-                                                <?=number_format($thanh_tien, 0, ',', '.').' đ';?>
-                                            </p>
-                                        </div>
-                                        <div class="cart_subtotal">
-                                            <p>Chi phí giao hàng:</p>
-                                            <p class="cart_amount"><?=number_format($chi_phi_giao_hang, 0, ',', '.').' đ';?></p>
-                                        </div>
-                                        <div class="cart_subtotal">
-                                            <p>Tổng cộng:</p>
-                                            <p class="cart_amount">
-                                                <?=number_format($tong_so_tien_can_thanh_toan, 0, ',', '.').' đ';?>
-                                            </p>
-                                        </div>
-                                        <div class="checkout_btn">
-                                            <a href="controllers/order_controller.php">Proceed to Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="checkout_btn">
+                            <a href="controllers/order_controller.php" class="btn btn-success">Proceed to Checkout</a>
                         </div>
                     </div>
                 </div>
-                <!--coupon code area end-->
+                </form>
+            </div>
         </div>
-        <!--shopping cart area end -->
+    </div>
+    <!--coupon code area end-->
+</div>
+<!--shopping cart area end -->
 </div>

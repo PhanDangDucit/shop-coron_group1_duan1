@@ -30,11 +30,9 @@
             <a class="navbar-brand" href="index.php?page=dashboard">
                 <h1 class="tm-site-title mb-0">Trang quản trị</h1>
             </a>
-            <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars tm-nav-icon"></i>
-            </button>
+            <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto h-100">
@@ -45,14 +43,15 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="oder.php" id="navbarDropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" href="oder.php" >
                             <i class="far fa-file-alt"></i>
-                            <span> Đơn hàng<i class="fas fa-angle-down"></i> </span>
+                            <span>
+                                Đơn hàng <i class="fas fa-angle-down"></i>
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="products.php">
+                        <a class="nav-link" href="products.php">
                             <i class="fas fa-shopping-cart"></i> Sản phẩm
                         </a>
                     </li>
@@ -62,20 +61,21 @@
                             <i class="far fa-user"></i> Tài khoản
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link " href="category.php" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="category.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-cog"></i>
                             <span>
                                 Danh mục<i class="fas fa-angle-down"></i>
                             </span>
                         </a>
+                        
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link d-block" href="login.html">
-                            Quản trị viên, <b>Đăng xuất</b>
-                        </a>
+                        <a class="nav-link d-block" href="login.php">
+                Trang quản trị, <b>Đăng xuất</b>
+            </a>
                     </li>
                 </ul>
             </div>
@@ -102,60 +102,63 @@
                             </thead>
 
                             <?php
-                                require "./config/config.php";
-                                include './model/conn.php';
-                                try {
-                                    
+require "./config/config.php";
+include './model/conn.php';
 
-                                    $query = "SELECT * FROM payment_method 
 
-                                    INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
-                                    INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
-                                    INNER JOIN contact ON orders.contact_id = contact.contact_id
-                                    INNER JOIN user ON contact.user_id=user.user_id";
-                                    $stmt = $conn->prepare($query);
-                                    $stmt->execute();
-                                    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                    $query2= "SELECT * FROM order_status";
-                                    $stmt = $conn->prepare($query2);
-                                    $stmt->execute();
-                                    $order_status = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($orders as $order) {
-                                        echo '<tr>';
-                                        echo '<td class="tm-product-name">' . $order['order_id'] . '</td>';
-                                        echo '<td class="tm-product-name">' . $order['fullname'] . '</td>';
-                                        echo '<td>' . $order['phone'] . '</td>';
-                                        echo '<td>' . $order['email'] . '</td>';
-                                        echo '<td>' . $order['address'] . '</td>';
-                                        echo '<td>' ;
-                                        if ($order['payment_status']==0) echo "Chưa thanh toán"; 
-                                        else echo "Đã thanh toán"; 
-                                        '</td>';
-                                        echo '<td>' . '<form action="model/update_order.php" method="post" enctype="multipart/form-data" class="tm-edit-product-form">' . '<input name="order_id" value="' . $order['order_id'] . '" style="display:none !important;">' . '<select id="order_status_id" name="order_status_id">';
-                                foreach ($order_status as $o) {
-                                    echo '<option value="' . $o['order_status_id'] . '"';
-                                    if ($o['order_status_id'] == $order['order_status_id']) {
-                                        echo ' selected'; // Add the 'selected' attribute if the values match
-                                    }
-                                    echo '>' . $o['value'] . '</option>';
-                                }
-                                echo '</select>' . '</td>';
-                                        echo '<td>  ';
-                                        echo '<input type="submit"></input>';
+try {
+    
 
-                                        echo '</form>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }
-                                } catch (PDOException $e) {
-                                    echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
-                                }
-                                ?>
+    $query = "SELECT * FROM orders  
+
+    INNER JOIN payment_method ON payment_method.payment_method_id = orders.payment_method_id 
+    INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
+    INNER JOIN contact ON orders.contact_id = contact.contact_id
+    INNER JOIN user ON contact.user_id=user.user_id";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $query2= "SELECT * FROM order_status";
+    $stmt = $conn->prepare($query2);
+    $stmt->execute();
+    $order_status = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($orders as $order) {
+        echo '<tr>';
+        echo '<td class="tm-product-name">' . $order['order_id'] . '</td>';
+        echo '<td class="tm-product-name">' . $order['fullname'] . '</td>';
+        echo '<td>' . $order['phone'] . '</td>';
+        echo '<td>' . $order['email'] . '</td>';
+        echo '<td>' . $order['address'] . '</td>';
+        echo '<td>' . $order['payment_status'] . '</td>';
+        echo '<td>' ;
+        if ($order['payment_status']==0) echo "Chưa thanh toán"; 
+        else echo "Đã thanh toán"; 
+         '</td>';
+        echo '<td>' . '<form action="model/update_order.php" method="post" enctype="multipart/form-data" class="tm-edit-product-form">' . '<input name="order_id" value="' . $order['order_id'] . '" style="display:none !important;">' . '<select id="order_status_id" name="order_status_id">';
+foreach ($order_status as $o) {
+    echo '<option value="' . $o['order_status_id'] . '"';
+    if ($o['order_status_id'] == $order['order_status_id']) {
+        echo ' selected'; 
+    }
+    echo '>' . $o['value'] . '</option>';
+}
+echo '</select>' . '</td>';
+        echo '<td>  ';
+        echo '<input type="submit"></input>';
+
+        echo '</form>';
+        echo '</td>';
+        echo '</tr>';
+    }
+} catch (PDOException $e) {
+    echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+}
+?>
 
 
                         </table>
                     </div>
-                    <!-- table container -->
+                   
                 </div>
             </div>
         </div>

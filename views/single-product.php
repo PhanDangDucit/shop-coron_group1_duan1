@@ -19,9 +19,9 @@
                 <div class="tab-content produc_tab_c">
                     <div class="tab-pane fade show active" id="p_tab1" role="tabpanel">
                         <div class="modal_img">
-                            <a href="#"><img src="assets\img\product\product13.jpg" alt=""></a>
+                            <a href="#"><img src="assets\<?=$productsDetail['thumbnail']?>" alt="" height="421px"></a>
                             <div class="img_icone">
-                                <img src="assets\img\cart\span-new.png" alt="">
+                                <img src="<?=$productsDetail['thumbnail']?>" alt="">
                             </div>
                             <div class="view_img">
                                 <a class="large_view" href="assets\img\product\product13.jpg"><i class="fa fa-search-plus"></i></a>
@@ -32,7 +32,7 @@
                         <div class="modal_img">
                             <a href="#"><img src="assets\img\product\product14.jpg" alt=""></a>
                             <div class="img_icone">
-                                <img src="assets\img\cart\span-new.png" alt="">
+                                <img src="<?=$productsDetail['thumbnail']?>" alt="">
                             </div>
                             <div class="view_img">
                                 <a class="large_view" href="assets\img\product\product14.jpg"><i class="fa fa-search-plus"></i></a>
@@ -43,7 +43,7 @@
                         <div class="modal_img">
                             <a href="#"><img src="assets\img\product\product15.jpg" alt=""></a>
                             <div class="img_icone">
-                                <img src="assets\img\cart\span-new.png" alt="">
+                                <img src="<?=$productsDetail['thumbnail']?>" alt="">
                             </div>
                             <div class="view_img">
                                 <a class="large_view" href="assets\img\product\product15.jpg"> <i class="fa fa-search-plus"></i></a>
@@ -212,13 +212,13 @@
         <div class="row">
             <div class="new_product_area">
                     <div class="row mb-4">
-                        <?php foreach($products as $product) : ?>
+                        <?php foreach($products as $product) { ?>
                             <div class="col-lg-3">
-                                <div class="single_product">
+                                <div class="single_product" style="height: 410px;">
                                     <div class="product_thumb">
-                                        <a href="?page=single-product&id=<?= $product["product_id"] ?>"><img src="assets\img\product\product1.jpg" alt=""></a> 
+                                        <a href="?page=single-product&id=<?= $product["product_id"] ?>"><img src="assets/<?=$product['thumbnail']?>" alt="" style="height: 250px;"></a> 
                                         <div class="img_icone">
-                                            <img src="assets\img\cart\span-new.png" alt="">
+                                            <img src="../assets/<?=$product['thumbnail']?>" alt="">
                                         </div>
                                         <div class="product_action">
                                             <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
@@ -227,7 +227,7 @@
                                     <div class="product_content">
                                         <span class="product_price"><del style="color: gray;"><?= number_format($product["price"]) ?> đ</del></span>
                                         <span class="product_price"><?= number_format($product["price_sale"]) ?> đ</span>
-                                        <h3 class="product_title"><a href="?page=single-product"><?= $product['name'] ?></a></h3>
+                                        <h3 class="product_title"><a href="?page=single-product&id=<?= $product["product_id"] ?>"><?= $product['name'] ?></a></h3>
                                     </div>
                                     <div class="product_info">
                                         <ul>
@@ -237,7 +237,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                        <?php } ?>
                         <!-- Pagination -->
                         <nav aria-label="Page navigation example" style="width: 100%; display: flex; justify-content: center;">
                             <ul class="pagination">

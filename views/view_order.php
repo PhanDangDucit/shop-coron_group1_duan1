@@ -55,7 +55,7 @@ try {
 
             // Kiểm tra nếu đơn hàng đang ở trạng thái chờ xác nhận thì hiển thị nút "Hủy Đơn Hàng"
             if ($order_status == 'chờ xác nhận') {
-                echo "<a href='index.php?page=cancel_order=$order_id'>Hủy Đơn Hàng</a>";
+                echo "<a href='controllers/cancel_controller_order.php?order_id=$order_id'>Hủy Đơn Hàng</a>";
             }
             echo "</td>"; // Kết thúc cột "Hành động"
             echo "</tr>";

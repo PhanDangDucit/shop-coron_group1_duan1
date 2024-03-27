@@ -53,11 +53,12 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `register_date` datetime default current_timestamp,
   `role` tinyint default 1,
+  avatar varchar(255),
   PRIMARY KEY (`user_id`)
 );
 
 -- is_default:
--- 0: Thông tin dự phòng --> 1: Thông tin chính sử dụng để đặt hàng
+-- 0: Thông tin chính sử dụng để đặt hàng --> 1: Thông tin bo sung
 CREATE TABLE `contact` (
   `contact_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -233,25 +234,25 @@ insert into order_item (product_id, quantity, order_id, price) values
 (3, 2, 1, 1250000);
 
 
--- select * from user;
--- select * from payment_method;
--- select * from cart_item;
--- select * from orders;
--- -- select order_id from orders
--- -- where user_id = 2 and order_date is null;
+select * from user;
+select * from payment_method;
+select * from cart_item;
+select * from orders;
+-- select order_id from orders
+-- where user_id = 2 and order_date is null;
 
--- select * from contact;
--- select * from order_item;
--- -- 2: status 1: 1
+select * from contact;
+select * from order_item;
+-- 2: status 1: 1
 -- status 4: 1
 -- status 0: 2
--- select * from orders;
--- -- status 1: 2
--- -- status 4: 1
--- -- status 0: 1
--- select * from order_status;
--- select * from category;
--- select * from images;
+select * from orders;
+-- status 1: 2
+-- status 4: 1
+-- status 0: 1
+select * from order_status;
+select * from category;
+select * from images;
 
 -- select cart_item.product_id, quantity, price_sale from cart_item
 --             inner join product 
@@ -269,40 +270,41 @@ insert into order_item (product_id, quantity, order_id, price) values
 -- group by month(order_date), year(order_date)
 -- order by year(order_date), month(order_date);
 
--- select distinct(year(order_date)) as 'nam' from orders;
+select distinct(year(order_date)) as 'nam' from orders;
 
 -- select month(order_date) as 'thang', year(order_date) as 'nam' from orders
 -- group by month(order_date), year(order_date);
 
--- select sum(price*quantity) as 'doanh_thu', month(order_date) as 'thang', year(order_date) as 'nam'
--- from orders inner join order_item 
--- on orders.order_id = order_item.order_id
--- where order_date is not null
--- group by month(order_date), year(order_date)
--- order by year(order_date), month(order_date);
+select sum(price*quantity) as 'doanh_thu', month(order_date) as 'thang', year(order_date) as 'nam'
+from orders inner join order_item 
+on orders.order_id = order_item.order_id
+where order_date is not null
+group by month(order_date), year(order_date)
+order by year(order_date), month(order_date);
 
 -- select year(order_date), month(order_date), sales
 --      from orders inner join order_item on orders.order_id = order_item.order_id
 --      group by year(order_date),month(order_date)
 --      order by year(order_date),month(order_date);
 
--- select count(order_id), `value`
--- from orders
--- inner join order_status
--- on order_status.order_status_id = orders.order_status_id
--- group by order_status.order_status_id;
+select count(order_id), `value`
+from orders
+inner join order_status
+on order_status.order_status_id = orders.order_status_id
+group by order_status.order_status_id;
 
+select * from user;
+select * from contact;
+SELECT * FROM payment_method 
+INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
+INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
+INNER JOIN contact ON orders.contact_id = contact.contact_id
+INNER JOIN user ON contact.user_id = user.user_id;
 
--- SELECT * FROM payment_method 
--- INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
--- INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
--- INNER JOIN contact ON orders.contact_id = contact.contact_id
--- INNER JOIN user ON contact.user_id = user.user_id;
-
--- SELECT * FROM payment_method 
---     INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
---     INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
---     INNER JOIN contact ON orders.contact_id = contact.contact_id
---     INNER JOIN user ON contact.user_id=user.user_id;
+SELECT * FROM payment_method 
+    INNER JOIN orders ON payment_method.payment_method_id = orders.payment_method_id 
+    INNER JOIN order_status ON orders.order_status_id = order_status.order_status_id
+    INNER JOIN contact ON orders.contact_id = contact.contact_id
+    INNER JOIN user ON contact.user_id=user.user_id;
 
 --     Mã đơn hàng	Tên khách hàng	SDT	Email	Địa chỉ	Trạng thái thanh toán	Trạng thái đơn hàng
